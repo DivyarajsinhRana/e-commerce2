@@ -1,5 +1,5 @@
 const initialstate=[{
-    id:null,
+    id:0,
     title:null,
     image:null,
     category:null,

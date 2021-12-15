@@ -38,7 +38,7 @@ const Cart = () => {
                             (
                                 <div>
                                     <img src={product.image} className="image mx-5" alt="" />
-                                    <h1>{product.id}</h1>
+                                    {/* <h1>{product.id}</h1> */}
                                     <div>
                                         <h4>{product.title}</h4>
                                         {/* <p>{addedProducttoCart[id].category}</p> */}

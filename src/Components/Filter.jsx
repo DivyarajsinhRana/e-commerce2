@@ -1,40 +1,67 @@
-import React from 'react'
 
-const Filter = () => {
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchProduct } from '../Redux/fetchProductAction'
+import productReducer from '../Redux/productReducer'
+import ProductCard from './ProductCard'
+import "../Styles/productcard.css"
+import { useNavigate } from 'react-router'
+import { baseURL } from '../API'
+const Filter = (props) => {
+    // const items = useSelector(state => state.productlist.product);
+    // const item = useSelector(state => state.productlist);
+    // const navigate=useNavigate();
+    // const dispatch = useDispatch()
+    // useEffect(() => {
+    //     dispatch(fetchProduct(baseURL))
+    // }, [])
     return (
         <>
-            <div className='mt-5'>
-            <div>
-                <select className="form-select" aria-label="Default select example">
-                    <option value="0">Filter by category</option>
-                    <option value="1">Men's clothing</option>
-                    <option value="2">jewelery</option>
-                    <option value="3">electronics</option>
-                    <option value="3">Women's clothing</option>
-                </select>
+        <div className='d-flex justify-content-between mt-3'>
+            <div className='text-center'>
+                <h3>{props.length} products</h3>
             </div>
-            <div className='mt-5'>
-                <select className="form-select" aria-label="Default select example">
-                    <option value="0">Filter by price</option>
-                    <option value="1">High to low</option>
-                    <option value="2">Low to high</option>
-                </select>
-            </div>
-            {/* <div className='mt-5'>
-            <div className="form-check">
-                <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                <label className="form-check-label" htmlFor="flexCheckChecked">
-                    by price (high to low)
-                </label>
-            </div>
-            <div className="form-check">
-                <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-                <label className="form-check-label" htmlFor="flexCheckChecked">
-                    by price (low to high)
-                </label>
-            </div>
-            </div> */}
+                    <div className='filter-category'>
+                        <select className="form-select" aria-label="Default select example" value={props.category} onChange={props.filterProduct}>
+                            <option value="Filter by category">Filter by category</option>
+                            <option value="Men's clothing">Men's clothing</option>
+                            <option value="jewelery">jewelery</option>
+                            <option value="electronics">electronics</option>
+                            <option value="Women's clothing">Women's clothing</option>
+                        </select>
+                    </div>
+                    <div className='filter-price mx-2'>
+                        <select className="form-select" aria-label="Default select example" value={props.sort} onChange={props.sortProduct}>
+                            <option value="Filter by price">Filter by price</option>
+                            <option value="High to low">High to low</option>
+                            <option value="Low to high">Low to high</option>
+                        </select>
+                    </div>
         </div>
+         {/* <div>
+             {
+                item.loading ?
+                    (<h2>Loading products from api</h2>) :
+                    item.errors ?
+                        (<h2>{item.errors}</h2>) :
+                        (
+                            <div className='row gx-5'>{
+                                item.product.map(
+                                    (user, id) =>
+                                    (
+                                        <div className="col-3" key={id}  onClick={() => {
+                                            navigate(`/productdetails/${user.id}`);
+                                        }}>  
+                                            <ProductCard  src={user.image} title={user.title} category={user.category} price={user.price}
+                                            />
+                                        </div>
+                                        
+                                    )
+                                )
+                            }</div>
+                        )
+            }
+        </div> */}
         </>
     )
 }

@@ -7,9 +7,8 @@ import "../Styles/productcard.css"
 import { useNavigate } from 'react-router'
 import { baseURL } from '../API'
 
-const Productlist = () => {
+const Productlist = (props) => {
     const navigate=useNavigate();
-  
     const dispatch = useDispatch()
     const item = useSelector(state => state.productlist)
     useEffect(() => {
