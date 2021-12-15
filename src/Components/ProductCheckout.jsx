@@ -15,6 +15,7 @@ const ProductCheckout = () => {
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Category</th>
                         <th scope="col">Price</th>
                         <th scope="col">Remove</th>
@@ -26,9 +27,10 @@ const ProductCheckout = () => {
                             return(
                                 <tr key={id}>
                                 <td>{id+1}</td>
-                                <td>{newProduct.title}</td>
-                                <td>{newProduct.category}</td>
-                                <td>{newProduct.price}</td>
+                                <td><h5>{product.title}</h5></td>
+                                <td><img style={{height:"10%",width:"15%"}} src={product.image}/></td>
+                                <td><h5>{product.category}</h5></td>
+                                <td><h5>${product.price}</h5></td>
                                 <td>
                                     <Button className="bg-danger">
                                         <DeleteOutlined />

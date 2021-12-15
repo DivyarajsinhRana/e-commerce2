@@ -13,9 +13,13 @@ const cartaddreducer=(state=initialstate,action)=>{
                 return state
             }
         case "removeproduct":
-            {
-                state=[...state,state.splice(action.payload,1)]
-                return state
+            {  
+                const filterProduct = state.filter(product=>product.id!==action.payload ? product:null    
+                    && product )
+                    state=filterProduct;
+                    return state       
+                // state=[state.splice(action.payload,1)]
+                // return state
             }
         default:return state
     }

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { RemoveCircle } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
-import {removeFromCart} from '../Redux/countaction'
+import { removeFromCart } from '../Redux/countaction'
 import ProductCard from './ProductCard'
 import { baseURL } from '../API';
 import Cartdata from './Cartdata';
@@ -11,40 +11,59 @@ import { removeproduct } from '../Redux/cartaction';
 import { useNavigate } from 'react-router';
 import { addedtocart } from '../Redux/cartaction'
 const Cart = () => {
-    const dispatch=useDispatch();
-    const navigate=useNavigate();
-    const addedProducttoCart=useSelector(state=>state.addcart);
-    const cartItem=useSelector(state=>state.cart)
-    console.log(addedProducttoCart);
+    // const [click,setClick]=useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const addedProducttoCart = useSelector(state => state.addcart);
+    console.log(addedProducttoCart)
+    const cartItem = useSelector(state => state.cart)
+
+    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
+
+    // console.log(total)
+    // console.log(addedProducttoCart);
+    const handleClick = (id) => {
+       
+        dispatch(removeFromCart());
+        dispatch(removeproduct(id))
+    }
     return (
         <div>
             <h2>Cart</h2>
-             <p>you have {cartItem} in your cart </p>
-             {
-                 addedProducttoCart ?  addedProducttoCart.map((product,id)=>{
+            <p>you have {cartItem} product in your cart </p>
+            {
+                addedProducttoCart.map((product, id) => {
                     return (
-                        <div>
-                            <img src={addedProducttoCart[id].image} className="image mx-5" alt="" />
-                            <div>
-                                <h4>{addedProducttoCart[id].title}</h4>
-                                {/* <p>{addedProducttoCart[id].category}</p> */}
-                                <p>price:<strong>${addedProducttoCart[id].price}</strong></p>
-                            </div>
-                            <div>
-                            <button className="btn btn-danger" /*onClick={()=>{dispatch(removeFromCart());dispatch(removeproduct(id))}}*/><RemoveCircle/>Remove from cart</button>
-                            </div>
+                        <div key={id}>{
+                            (
+                                <div>
+                                    <img src={product.image} className="image mx-5" alt="" />
+                                    <h1>{product.id}</h1>
+                                    <div>
+                                        <h4>{product.title}</h4>
+                                        {/* <p>{addedProducttoCart[id].category}</p> */}
+                                        <p>price:<strong>${product.price}</strong></p>
+                                    </div>
+                                    <div>
+                                        <button className="btn btn-danger" onClick={()=>handleClick(product.id)}><RemoveCircle />Remove from cart</button>
+                                    </div>
+                                </div>
+                            )
+                        }
+
                         </div>
                     )
-                }) : null
-             }   
-             
-             <div>
-                 <button className="btn btn-success mt-3" onClick={()=>
-                    {
-                        dispatch(addedtocart(addedProducttoCart));
-                        navigate("/checkout")}}>
-                            Checkout</button>
-             </div>
+                })
+            }
+    
+            <div>
+                <button className="btn btn-success mt-3" onClick={() => {
+                    dispatch(addedtocart(addedProducttoCart));
+                    navigate("/checkout")
+                }}>
+                    Checkout</button>
+            </div>
+            <div><p>Total amount:</p></div>
         </div>
     )
 }

@@ -12,6 +12,7 @@ const Productdetail = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const item = useSelector(state => state.productlist.product);
+    console.log(item);
     const selectedItem = item.find((item) => item.id === parseInt(id));
     // console.log(selectedItem)
     useEffect(() => {
@@ -24,6 +25,7 @@ const Productdetail = () => {
     // const [price,setPrice]=usestate()
     // console.log(cartItem)
     const cartedProduct={
+        id:selectedItem.id,
         title:selectedItem.title,
         image:selectedItem.image,
         category:selectedItem.category,
