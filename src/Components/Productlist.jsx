@@ -10,20 +10,20 @@ import { baseURL } from '../API'
 const Productlist = (props) => {
     const navigate=useNavigate();
     const dispatch = useDispatch()
-    const item = useSelector(state => state.productlist)
-    useEffect(() => {
-        dispatch(fetchProduct(baseURL))
-    }, [])
+    // const item = useSelector(state => state.productlist)
+    // useEffect(() => {
+    //     dispatch(fetchProduct(baseURL))
+    // }, [])
     return (
         <div>
             {
-                item.loading ?
+                props.item.loading ?
                     (<h2>Loading products from api</h2>) :
-                    item.errors ?
-                        (<h2>{item.errors}</h2>) :
+                    props.item.errors ?
+                        (<h2>{props.item.errors}</h2>) :
                         (
                             <div className='row gx-5'>{
-                                item.product.map(
+                                props.item.product.map(
                                     (user, id) =>
                                     (
                                         <div className="col-3" key={id}  onClick={() => {

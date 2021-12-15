@@ -1,32 +1,62 @@
 import '../Styles/home.css'
-import React, { useState } from 'react'
+import React, { useState,useEffect} from 'react'
 import Drawer from './Drawer'
 import Productlist from './Productlist'
 import Filter from './Filter'
-import { useSelector } from 'react-redux'
+import { fetchProduct } from '../Redux/fetchProductAction'
+import { baseURL } from '../API'
+
+import { useSelector,useDispatch } from 'react-redux'
 const Home = () => {
-    const items = useSelector(state => state.productlist.product);
-    const count = items.length;
+   
+    const dispatch = useDispatch()
+      useEffect(() => {
+        dispatch(fetchProduct(baseURL))
+        
+    }, [])
+    const items = useSelector(state => state.productlist);
+    // const [data, setData] = useState(items);
+    const availableCategory=items.product.map(product=>product.category);
+    console.log(availableCategory);
+    const set =new Set(availableCategory);
+    console.log(set);
+    const finalCategory=[...set];
+    console.log(finalCategory);
+    console.log(items)
+    const count = items.product.length;
+    // console.log(count)
     const [state, setstate] = useState({
-        products:items,
+        products:items.product,
         length:count,
         category:"",
         sort:""
     })
     const filterProduct=(e)=>{
-        console.log(e.target.value)   
-        if(e.target.value){
-            setstate({
-                category:e.target.value,
-                products:items
-            })
-        }
-        else{
-            setstate({
-                category:e.target.value,
-                products:items.filter(item=>item.category.indexOf(e.target.value)>=0)
-            })
-        }
+        console.log(e.target.value)
+        // console.log(data);   
+    //    switch(e.target.value){
+    //        case "Men's clothing": 
+    //        setData(items.product.category==="Men's clothing")
+    //         case "jewelery":
+    //             setData(items.product.category==="jewelery")
+    //         case "electronics":  
+    //          setData(items.product.category==="electronics")
+    //         case "Women's clothing":
+    //             setData(items.product.category==="Women's clothing")
+    //             default: return data
+    //    }
+        // if(e.target.value){
+        //     setstate({
+        //         category:e.target.value,
+        //         products:items.product
+        //     })
+        // }
+        // else{
+        //     setstate({
+        //         category:e.target.value,
+        //         products:items.product.filter(item=>item.finalCategory.indexOf(e.target.value)>=0)
+        //     })
+        // }
     }
     const sortProduct=(e)=>{
      console.log(e.target.value)
@@ -42,8 +72,8 @@ const Home = () => {
                 </div>
                 <div className="col1 col-9">
                     <div>
-                        <Filter length={state.length} category={state.category} sort={state.sort} filterProduct={filterProduct} sortProduct={sortProduct} />
-                    <Productlist/>
+                        <Filter length={count} category={state.category} sort={state.sort} filterProduct={filterProduct} sortProduct={sortProduct} />
+                    <Productlist item={items}/>
                     </div>
                     {/* <div className='mt-2'>
                     </div> */}

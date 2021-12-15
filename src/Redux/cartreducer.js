@@ -3,7 +3,7 @@ const initialstate=[{
     title:null,
     image:null,
     category:null,
-    price:null
+    price:0
 }]
 const cartaddreducer=(state=initialstate,action)=>{
     switch(action.type){

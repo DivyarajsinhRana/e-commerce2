@@ -3,9 +3,15 @@ import { useNavigate } from 'react-router'
 import { DeleteOutlined, EditOutlined } from '@material-ui/icons'
 import { Button } from '@material-ui/core'
 import { useSelector } from "react-redux";
+
 const ProductCheckout = () => {
     const navigate=useNavigate();
     const newProduct = useSelector(state => state.addcart)
+    const amount=newProduct.map(cart=>cart.price);
+    
+    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    // const total=amount.reduce(reducer);
+    // console.log(total)
     console.log(newProduct);
     return (
         <div>
@@ -49,9 +55,11 @@ const ProductCheckout = () => {
                 <div className="d-flex justify-content-center"> 
                 <button className="btn btn-primary" onClick={()=>navigate('/')}>Back</button>
                 <button className="btn btn-success mx-2" onClick={()=>navigate('/order')}>Procced to buy</button>
+                {/* <p>amount:{total}</p> */}
                 </div>
         </div>
     )
 }
 
 export default ProductCheckout
+
