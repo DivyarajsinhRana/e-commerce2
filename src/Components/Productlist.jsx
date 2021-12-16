@@ -10,20 +10,20 @@ import { baseURL } from '../API'
 const Productlist = (props) => {
     const navigate=useNavigate();
     const dispatch = useDispatch()
-    // const item = useSelector(state => state.productlist)
+    const items = useSelector(state => state.productlist)
     // useEffect(() => {
     //     dispatch(fetchProduct(baseURL))
     // }, [])
     return (
         <div>
-            {
-                props.item.loading ?
+            {/* {
+                items.loading ?
                     (<h2>Loading products from api</h2>) :
-                    props.item.errors ?
-                        (<h2>{props.item.errors}</h2>) :
+                    items.errors ?
+                        (<h2>{items.errors}</h2>) :
                         (
                             <div className='row gx-5'>{
-                                props.item.product.map(
+                                props.item.map(
                                     (user, id) =>
                                     (
                                         <div className="col-3" key={id}  onClick={() => {
@@ -37,7 +37,8 @@ const Productlist = (props) => {
                                 )
                             }</div>
                         )
-            }
+
+            } */}
            
            
 

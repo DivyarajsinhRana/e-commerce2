@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux';
 import { RemoveCircle } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
 import { removeFromCart } from '../Redux/countaction'
-import ProductCard from './ProductCard'
-import { baseURL } from '../API';
-import Cartdata from './Cartdata';
 import '../Styles/cart.css'
 import { removeproduct } from '../Redux/cartaction';
 import { useNavigate } from 'react-router';
@@ -21,13 +18,7 @@ const Cart = () => {
     const total=amount.reduce(reducer);
     console.log(total)
     const cartItem = useSelector(state => state.cart)
-
-    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
-
-    // console.log(total)
-    // console.log(addedProducttoCart);
     const handleClick = (id) => {
-       
         dispatch(removeFromCart());
         dispatch(removeproduct(id))
     }
@@ -42,10 +33,8 @@ const Cart = () => {
                             (
                                 <div>
                                     <img src={product.image} className="image mx-5" alt="" />
-                                    {/* <h1>{product.id}</h1> */}
                                     <div>
                                         <h4>{product.title}</h4>
-                                        {/* <p>{addedProducttoCart[id].category}</p> */}
                                         <p><strong>${product.price}</strong></p>
                                     </div>
                                     <div>
@@ -59,7 +48,6 @@ const Cart = () => {
                     )
                 })
             }
-    
             <div>
                 <button className="btn btn-success mt-3" onClick={() => {
                     dispatch(addedtocart(addedProducttoCart));
@@ -71,5 +59,4 @@ const Cart = () => {
         </div>
     )
 }
-
 export default Cart

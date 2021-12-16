@@ -16,6 +16,12 @@ const getProduct_fail=(error)=>{
         payload:error
     }
 }
+const filterProduct=(filteredProduct)=>{
+    return{
+        type:"filter",
+        payload:filteredProduct
+    }
+}
 const fetchProduct=(url)=>{
     return (dispatch)=>{
             dispatch(getProduct_Req());
