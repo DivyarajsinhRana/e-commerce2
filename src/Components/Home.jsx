@@ -11,21 +11,21 @@ import "../Styles/productcard.css"
 const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
-    const [products,setProducts]=useState([])
-    const [filterproducts,setfilterProducts]=useState([])
+    const [products, setProducts] = useState([])
+    const [filterproducts, setfilterProducts] = useState([])
     useEffect(() => {
         dispatch(fetchProduct(baseURL))
-    },[])
+    }, [])
     const state = useSelector(state => state.productlist);
-    useEffect(()=>{
+    useEffect(() => {
         setProducts(items);
         setfilterProducts(items);
-    },[state])
-    const items=state.product;
-    const [category,setCategory]=useState('');
+    }, [state])
+    const items = state.product;
+    const [category, setCategory] = useState('');
     const count = filterproducts.length;
     const filterProduct = (e) => {
-        switch(e.target.value){
+        switch (e.target.value) {
             case "Filter by category":
                 setfilterProducts(filterproducts)
                 setCategory(filterproducts)
@@ -34,32 +34,32 @@ const Home = () => {
                 setfilterProducts(products.filter(item => item.category === "men's clothing"));
                 console.log("category1");
                 console.log(e.target.value)
-              
+
                 break;
-                case "jewelery":
-                    setfilterProducts(products.filter(item => item.category === "jewelery"));
-                   
-                    console.log(e.target.value)
-                   
-                    break;
-                    case "electronics":
-                        setfilterProducts(products.filter(item => item.category === "electronics"));
-                      
-                        console.log("category3")
-                        console.log(e.target.value)
-                        break;
-                        case "women's clothing":
-                            setfilterProducts(products.filter(item => item.category === "women's clothing"));
-                           
-                            console.log(e.target.value)
-                            console.log("category4")
-                            break;
-                            default: 
-                            setfilterProducts(filterproducts)
-                            setCategory(filterproducts)
-                            console.log(e.target.value)
-                            console.log("default")
-                        }
+            case "jewelery":
+                setfilterProducts(products.filter(item => item.category === "jewelery"));
+
+                console.log(e.target.value)
+
+                break;
+            case "electronics":
+                setfilterProducts(products.filter(item => item.category === "electronics"));
+
+                console.log("category3")
+                console.log(e.target.value)
+                break;
+            case "women's clothing":
+                setfilterProducts(products.filter(item => item.category === "women's clothing"));
+
+                console.log(e.target.value)
+                console.log("category4")
+                break;
+            default:
+                setfilterProducts(filterproducts)
+                setCategory(filterproducts)
+                console.log(e.target.value)
+                console.log("default")
+        }
     }
     const [sort, setSort] = useState();
     const sortProduct = (e) => {
@@ -67,7 +67,7 @@ const Home = () => {
     }
     return (
         <>
-              <div className="container-fluid">
+            <div className="container-fluid">
                 <div className='mt-4 d-grid productGrid'>
                     <div className="row ">
                         <div className="col1 col-12">
@@ -77,10 +77,10 @@ const Home = () => {
                                     state.loading ?
                                         (
                                             <div className='d-flex justify-content-center align-item-center'>
-                                                <span className='spinner-border'/>
-                                                <span className='mx-2'>Loading products from api</span> 
+                                                <span className='spinner-border' />
+                                                <span className='mx-2'>Loading products from api</span>
                                             </div>
-                                            ) :
+                                        ) :
                                         state.errors ?
                                             (<h2>{state.errors}</h2>) :
                                             (
