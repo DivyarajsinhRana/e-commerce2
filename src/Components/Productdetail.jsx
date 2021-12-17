@@ -2,14 +2,14 @@ import React, { useEffect,useState } from 'react'
 import '../Styles/home.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchProduct } from '../Redux/fetchProductAction'
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import { baseURL } from '../API'
 import { AddCircle, Star } from '@material-ui/icons'
 import {addToCart, reset} from "../Redux/countaction"
 import { addedtocart } from '../Redux/cartaction'
-
 const Productdetail = () => {
     const dispatch = useDispatch();
+    const navigate=useNavigate();
     const { id } = useParams();
     const item = useSelector(state => state.productlist.product);
     console.log(item);
@@ -31,10 +31,12 @@ const Productdetail = () => {
         category:selectedItem.category,
         price:selectedItem.price
     }
-   
+   const [availstock,setAvailstock]=useState(selectedItem.rating.count);
     const handleCart=()=>{
         dispatch(addToCart());
         dispatch(addedtocart(cartedProduct));
+        // navigate("/");
+        setAvailstock((prev)=>prev-1);
     }
     return (
         <div className='mt-2 d-grid productGrid'>
@@ -48,7 +50,7 @@ const Productdetail = () => {
                         <p>{selectedItem.description}</p>
                         <div className='d-flex justify-content-between align-item-center'>
                             <p><Star />{selectedItem.rating.rate}</p>
-                            <p>Available stock:{selectedItem.rating.count}</p>
+                            <p>Available stock:{availstock}</p>
                         </div>
                         <div>
                             <button className='btn btn-primary' onClick={handleCart}><AddCircle/>Add to cart</button>
