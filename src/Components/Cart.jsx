@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useDispatch } from 'react-redux';
 import { RemoveCircle } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import '../Styles/cart.css'
 import { removeproduct } from '../Redux/cartaction';
 import { useNavigate } from 'react-router';
 import { addedtocart } from '../Redux/cartaction'
+import { Modal } from '@material-ui/core';
 const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ const Cart = () => {
     }
     return (
         <>
+            <Modal>
             <h2>Cart</h2>
             <p>you have {cartItem} product in your cart </p>
             {
@@ -54,7 +56,7 @@ const Cart = () => {
                     Checkout</button>
             </div>
             {/* <div><p>Total amount:${total}</p></div> */}
-        
+            </Modal>
         </>
     )
 }
