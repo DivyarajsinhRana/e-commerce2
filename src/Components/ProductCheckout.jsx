@@ -13,7 +13,6 @@ const ProductCheckout = () => {
    const [producttotal,setProducttotal]=useState(0)
     console.log(newProduct);
      const reducer = (previousValue, currentValue) => previousValue + currentValue;
-     //setProducttotal(ptotal);
      const total=()=>{
          if(amount.length===0){
              setProducttotal(0);

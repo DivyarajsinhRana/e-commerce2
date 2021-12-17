@@ -1,7 +1,5 @@
 import '../Styles/home.css'
 import React, { useState, useEffect } from 'react'
-import Drawer from './Drawer'
-import Productlist from './Productlist'
 import Filter from './Filter'
 import { fetchProduct } from '../Redux/fetchProductAction'
 import { baseURL } from '../API'
@@ -9,77 +7,61 @@ import ProductCard from './ProductCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import "../Styles/productcard.css"
+
 const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const [products,setProducts]=useState([])
+    const [filterproducts,setfilterProducts]=useState([])
     useEffect(() => {
         dispatch(fetchProduct(baseURL))
     },[])
     const state = useSelector(state => state.productlist);
-    // const products=useSelector(state=>state.productlist.product);
+    useEffect(()=>{
+        setProducts(items);
+        setfilterProducts(items);
+    },[state])
     const items=state.product;
-    const [data, setData] = useState(items);
-    console.log(items);
-    console.log(data);
-    // let data=state.product;
-    // console.log(data);
-    // const [data,setData]=useState(data);
-    // console.log(item);
-    const [sort, setSort] = useState();
-    const category1 = data.filter(item => item.category === "men's clothing");
-    const category2 = data.filter(item => item.category === "jewelery");
-    const category3 = data.filter(item => item.category === "electronics");
-    const category4 = data.filter(item => item.category === "women's clothing");
-    const [category,setCategory]=useState(data);
-    // console.log(category1)
-    // console.log(category2)
-    // console.log(category3)
-    // console.log(category4)
-    console.log(state)
-    const count = state.product.length;
-    console.log(count)
+    const [category,setCategory]=useState('');
+    const count = filterproducts.length;
     const filterProduct = (e) => {
-        console.log(e.target.value)
         switch(e.target.value){
-                case "men's clothing":
-                    setData(category1);
-                    console.log("category1");
-                    // setCategory(category1);
-                    break;
-                case "jewelery":
-                    setData(category2);
-                    // setCategory(category2);
-                    
-                    console.log("category2")
-                    break;
-                case "electronics":
-                    setData(category3);
-                    // setCategory(category3);
-                    
-                    console.log("category3")
-                    break;
-                case "Women's clothing":
-                    setData(category4);
-                    // setCategory(category4);
-                    
-                    console.log("category4")
-                    break;
-                default: 
-
-                // setData(state.product)
-                // setCategory(data)
-               
-                console.log("default")
+            case "Filter by category":
+                setfilterProducts(filterproducts)
+                setCategory(filterproducts)
+                console.log(e.target.value)
+            case "men's clothing":
+                setfilterProducts(products.filter(item => item.category === "men's clothing"));
+                console.log("category1");
+                console.log(e.target.value)
+              
                 break;
-        }
-        //        setData(state.product)
-        // if (e.target.value) {
-        //     setData(category1);
-        // }
-        // else {
-        //     setData(state.product)
-        // }
+                case "jewelery":
+                    setfilterProducts(products.filter(item => item.category === "jewelery"));
+                   
+                    console.log(e.target.value)
+                   
+                    break;
+                    case "electronics":
+                        setfilterProducts(products.filter(item => item.category === "electronics"));
+                      
+                        console.log("category3")
+                        console.log(e.target.value)
+                        break;
+                        case "women's clothing":
+                            setfilterProducts(products.filter(item => item.category === "women's clothing"));
+                           
+                            console.log(e.target.value)
+                            console.log("category4")
+                            break;
+                            default: 
+                            setfilterProducts(filterproducts)
+                            setCategory(filterproducts)
+                            console.log(e.target.value)
+                            console.log("default")
+                        }
     }
+    const [sort, setSort] = useState();
     const sortProduct = (e) => {
         console.log(e.target.value)
     }
@@ -88,13 +70,9 @@ const Home = () => {
               <div className="container-fluid">
                 <div className='mt-4 d-grid productGrid'>
                     <div className="row ">
-                        {/* <div className="col1 col-3">
-                            <Drawer />
-                        </div> */}
                         <div className="col1 col-12">
                             <div>
                                 <Filter length={count} category={category} sort={sort} filterProduct={filterProduct} sortProduct={sortProduct} />
-                                {/* <Productlist item={data}/> */}
                                 {
                                     state.loading ?
                                         (
@@ -107,7 +85,7 @@ const Home = () => {
                                             (<h2>{state.errors}</h2>) :
                                             (
                                                 <div className='row gx-5 mt-3'>{
-                                                    items.map(
+                                                    filterproducts.map(
                                                         (user, id) =>
                                                         (
                                                             <div className="col-3 cardStyle" key={id} onClick={() => {
