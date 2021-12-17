@@ -54,7 +54,6 @@ const Productdetail = () => {
                         </div>
                         <div>
                             <button className='btn btn-primary' onClick={handleCart}><AddCircle/>Add to cart</button>
-                            <button className='btn btn-primary mx-3' onClick={()=>dispatch(reset())}>Reset</button>
                             <button className='btn btn-primary mx-3'>Add to wishlist</button>
                         </div>
                     </div>

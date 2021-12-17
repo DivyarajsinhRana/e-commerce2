@@ -9,11 +9,23 @@ const ProductCheckout = () => {
     const newProduct = useSelector(state => state.addcart)
     const amount=newProduct.map(cart=>cart.price);
     console.log(amount);
-   // const [producttotal,setProducttotal]=useState(0)
+    console.log(amount.length);
+   const [producttotal,setProducttotal]=useState(0)
     console.log(newProduct);
-    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
-    // const ptotal=amount.reduce(reducer);
-    //setProducttotal(ptotal);
+     const reducer = (previousValue, currentValue) => previousValue + currentValue;
+     //setProducttotal(ptotal);
+     const total=()=>{
+         if(amount.length===0){
+             setProducttotal(0);
+        }
+        else{
+            const ptotal=amount.reduce(reducer);
+            setProducttotal(ptotal)
+        }
+     }
+    useEffect(()=>{
+        total();
+    },[])
     return (
         <div>
                  <div className=" container  mt-5">
@@ -40,7 +52,7 @@ const ProductCheckout = () => {
                                 <td><h5>${product.price}</h5></td>
                                 <td>
                                     <Button className="bg-danger">
-                                        <DeleteOutlined />
+                                        <DeleteOutlined  />
                                     </Button>
                                 </td>
                             </tr>
@@ -53,7 +65,7 @@ const ProductCheckout = () => {
                 <div className="d-flex justify-content-center"> 
                 <button className="btn btn-primary" onClick={()=>navigate('/')}>Back</button>
                 <button className="btn btn-success mx-2" onClick={()=>navigate('/order')}>Procced to buy</button>
-                {/* <p>amount:{ptotal}</p> */}
+                <p className=''>amount:{producttotal}</p>
                 </div>
         </div>
     )

@@ -30,7 +30,7 @@ const Home = () => {
     const category2 = data.filter(item => item.category === "jewelery");
     const category3 = data.filter(item => item.category === "electronics");
     const category4 = data.filter(item => item.category === "women's clothing");
-    // const [category,setCategory]=useState(data);
+    const [category,setCategory]=useState(data);
     // console.log(category1)
     // console.log(category2)
     // console.log(category3)
@@ -93,7 +93,7 @@ const Home = () => {
                         </div> */}
                         <div className="col1 col-12">
                             <div>
-                                <Filter length={count} /*category={category}*/ sort={sort} filterProduct={filterProduct} sortProduct={sortProduct} />
+                                <Filter length={count} category={category} sort={sort} filterProduct={filterProduct} sortProduct={sortProduct} />
                                 {/* <Productlist item={data}/> */}
                                 {
                                     state.loading ?

@@ -4,8 +4,6 @@ const cartItemReducer=(state=0,action)=>{
                 return state+1
         case "remove from cart":
                 return state-1
-        case "reset":
-            return (state=0)
         default: return state
     }
 }

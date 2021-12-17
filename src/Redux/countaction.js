@@ -9,9 +9,5 @@ const removeFromCart=()=>{
         type:"remove from cart"
     })
 }
-const reset=()=>{
-    return({
-        type:"reset"
-    })
-}
-export {addToCart,removeFromCart,reset}
+
+export {addToCart,removeFromCart}
