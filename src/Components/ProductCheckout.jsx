@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import { useNavigate } from 'react-router'
 import { DeleteOutlined, EditOutlined } from '@material-ui/icons'
 import { Button } from '@material-ui/core'
@@ -8,11 +8,12 @@ const ProductCheckout = () => {
     const navigate=useNavigate();
     const newProduct = useSelector(state => state.addcart)
     const amount=newProduct.map(cart=>cart.price);
-    
-    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
-    // const total=amount.reduce(reducer);
-    // console.log(total)
+    console.log(amount);
+   // const [producttotal,setProducttotal]=useState(0)
     console.log(newProduct);
+    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    // const ptotal=amount.reduce(reducer);
+    //setProducttotal(ptotal);
     return (
         <div>
                  <div className=" container  mt-5">
@@ -44,18 +45,15 @@ const ProductCheckout = () => {
                                 </td>
                             </tr>
                             )
-                           
                         })
                     }
-
-                    
                 </tbody>
             </table>
         </div>
                 <div className="d-flex justify-content-center"> 
                 <button className="btn btn-primary" onClick={()=>navigate('/')}>Back</button>
                 <button className="btn btn-success mx-2" onClick={()=>navigate('/order')}>Procced to buy</button>
-                {/* <p>amount:{total}</p> */}
+                {/* <p>amount:{ptotal}</p> */}
                 </div>
         </div>
     )

@@ -1,4 +1,4 @@
-const cartItemReducer=(state=1,action)=>{
+const cartItemReducer=(state=0,action)=>{
     switch(action.type){
         case "add to cart":
                 return state+1

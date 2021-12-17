@@ -15,11 +15,13 @@ const Home = () => {
     useEffect(() => {
         dispatch(fetchProduct(baseURL))
     },[])
-    const items = useSelector(state => state.productlist);
-    
+    const state = useSelector(state => state.productlist);
     // const products=useSelector(state=>state.productlist.product);
-    const [data, setData] = useState(items.product);
-    // let data=items.product;
+    const items=state.product;
+    const [data, setData] = useState(items);
+    console.log(items);
+    console.log(data);
+    // let data=state.product;
     // console.log(data);
     // const [data,setData]=useState(data);
     // console.log(item);
@@ -33,16 +35,14 @@ const Home = () => {
     // console.log(category2)
     // console.log(category3)
     // console.log(category4)
-    console.log(items)
-    const count = items.product.length;
+    console.log(state)
+    const count = state.product.length;
     console.log(count)
     const filterProduct = (e) => {
         console.log(e.target.value)
         switch(e.target.value){
                 case "men's clothing":
                     setData(category1);
-                    
-                   
                     console.log("category1");
                     // setCategory(category1);
                     break;
@@ -66,18 +66,18 @@ const Home = () => {
                     break;
                 default: 
 
-                // setData(items.product)
+                // setData(state.product)
                 // setCategory(data)
                
                 console.log("default")
                 break;
         }
-        //        setData(items.product)
+        //        setData(state.product)
         // if (e.target.value) {
         //     setData(category1);
         // }
         // else {
-        //     setData(items.product)
+        //     setData(state.product)
         // }
     }
     const sortProduct = (e) => {
@@ -88,21 +88,26 @@ const Home = () => {
               <div className="container-fluid">
                 <div className='mt-4 d-grid productGrid'>
                     <div className="row ">
-                        <div className="col1 col-3">
+                        {/* <div className="col1 col-3">
                             <Drawer />
-                        </div>
-                        <div className="col1 col-9">
+                        </div> */}
+                        <div className="col1 col-12">
                             <div>
                                 <Filter length={count} /*category={category}*/ sort={sort} filterProduct={filterProduct} sortProduct={sortProduct} />
                                 {/* <Productlist item={data}/> */}
                                 {
-                                    items.loading ?
-                                        (<h2>Loading products from api</h2>) :
-                                        items.errors ?
-                                            (<h2>{items.errors}</h2>) :
+                                    state.loading ?
+                                        (
+                                            <div className='d-flex justify-content-center align-item-center'>
+                                                <span className='spinner-border'/>
+                                                <span className='mx-2'>Loading products from api</span> 
+                                            </div>
+                                            ) :
+                                        state.errors ?
+                                            (<h2>{state.errors}</h2>) :
                                             (
-                                                <div className='row gx-5'>{
-                                                    items.product.map(
+                                                <div className='row gx-5 mt-3'>{
+                                                    items.map(
                                                         (user, id) =>
                                                         (
                                                             <div className="col-3 cardStyle" key={id} onClick={() => {

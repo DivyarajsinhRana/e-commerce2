@@ -35,7 +35,7 @@ const Productdetail = () => {
     const handleCart=()=>{
         dispatch(addToCart());
         dispatch(addedtocart(cartedProduct));
-        // navigate("/");
+        navigate("/");
         setAvailstock((prev)=>prev-1);
     }
     return (

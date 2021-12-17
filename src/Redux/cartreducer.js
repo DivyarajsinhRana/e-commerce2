@@ -1,10 +1,11 @@
-const initialstate=[{
-    id:0,
-    title:null,
-    image:null,
-    category:null,
-    price:0
-}]
+ const initialstate=[];
+// {
+//     id:0,
+//     title:null,
+//     image:null,
+//     category:null,
+//     price:0
+// }
 const cartaddreducer=(state=initialstate,action)=>{
     switch(action.type){
         case "addedtocart":
