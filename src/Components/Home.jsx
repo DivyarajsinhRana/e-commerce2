@@ -23,6 +23,7 @@ const Home = () => {
     const [category, setCategory] = useState('');
     const count = filterproducts.length;
     const filterProduct = (e) => {
+       
         switch (e.target.value) {
             case "Filter by category":
                 setfilterProducts(filterproducts)
@@ -62,21 +63,30 @@ const Home = () => {
     const [sort, setSort] = useState('');
     console.log(filterproducts)
     const sortProduct = (e) => {
-        setSort(e.target.value)
-        switch(e.target.value){
-            case "Low to high" :
-                setfilterProducts((state)=>[...state].sort((a, b) => a.price - b.price));
-                console.log("case1")
-                break;
-            case "High to low":
-                setfilterProducts((state)=>[...state].sort((a, b) => b.price - a.price));
-                console.log("case1")
-                break;
-            default :
-            setfilterProducts(products)
-            console.log("default")
-            break;
+        if(e.target.value === 'Low to high'){
+            setfilterProducts((state)=>[...state].sort((a, b) => a.price - b.price));
+        }else if(e.target.value === 'High to low'){
+            setfilterProducts((state)=>[...state].sort((a, b) => b.price - a.price));
         }
+        else{
+            setfilterProducts(products);
+        }
+        // setSort(e.target.value)
+        // console.log(">>>>>>> HERE", e.target.value)
+        // switch(e.target.value){
+        //     case "Low to high" :
+        //         setfilterProducts((state)=>[...state].sort((a, b) => a.price - b.price));
+        //         console.log("case1")
+        //         break;
+        //     case "High to low":
+        //         setfilterProducts((state)=>[...state].sort((a, b) => b.price - a.price));
+        //         console.log("case1")
+        //         break;
+        //     default :
+        //     setfilterProducts(products)
+        //     console.log("default")
+        //     break;
+        // }
     }
     return (
         <>
