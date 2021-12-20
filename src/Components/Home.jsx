@@ -16,7 +16,7 @@ const Home = () => {
         dispatch(fetchProduct(baseURL))
     }, [])
     const state = useSelector(state => state.productlist);
-    useEffect(() => {
+    useEffect(() => {     
         setProducts(items);
         setfilterProducts(items);
     }, [state])
@@ -54,8 +54,8 @@ const Home = () => {
                 console.log("category4")
                 break;
             default:
-                setfilterProducts(filterproducts)
-                setCategory(filterproducts)
+                setfilterProducts(products);
+                setCategory(products)
                 console.log(e.target.value)
                 console.log("default")
         }
