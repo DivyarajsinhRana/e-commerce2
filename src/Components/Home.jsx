@@ -6,8 +6,7 @@ import { baseURL } from '../API'
 import ProductCard from './ProductCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import "../Styles/productcard.css"
-
+import "../Styles/productcard.css"  
 const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -61,10 +60,48 @@ const Home = () => {
                 console.log("default")
         }
     }
-    const [sort, setSort] = useState();
+    // const initial = [1, 7, 3, 5];
+    
+    // console.log(initial, sorted)
+    const [sort, setSort] = useState('');
+    
+
+    // console.log(sorted);
+   
+// console.log(initial, sorted)
+// const sorted = [...filterproducts].sort((a, b) => a.price - b.price);
+// setfilterProducts(sorted);
+console.log(filterproducts)
     const sortProduct = (e) => {
-        console.log(e.target.value)
+        setSort(e.target.value)
+        //   if (sort==="Low to high"){
+        //    }
+        switch(e.target.value){
+            case "Low to high" :
+                setfilterProducts((state)=>[...state].sort((a, b) => a.price - b.price));
+                console.log("case1")
+                break;
+            case "High to low":
+                setfilterProducts((state)=>[...state].sort((a, b) => b.price - a.price));
+                console.log("case1")
+                break;
+            default :
+            setfilterProducts(products)
+            console.log("default")
+            break;
+        }
+    //     if(e.target.value==="Low to high"){
+    //         setfilterProducts((state)=>[...state].sort((a, b) => a.price - b.price));
+    //     }
+    //     else if(e.target.valuet==="High to low"){
+    //         setfilterProducts((state)=>[...state].sort((a, b) => b.price - a.price));
+    //     }
+    //     else {
+    //         setfilterProducts(filterproducts)
+    //     }
+    //    }
     }
+    
     return (
         <>
             <div className="container-fluid">
