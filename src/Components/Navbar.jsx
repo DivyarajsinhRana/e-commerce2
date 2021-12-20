@@ -56,9 +56,10 @@ const Navbar = () => {
                                 <span class="badge badge-dark text-dark">{cartitem}</span>
                             </button>
                             <Drawer open={open} onClose={handleClose} anchor="right" className="cartDrawer">
-                                <div className='bg-white text-dark'>
+                                <div className='bg-white text-dark mx-5'>
                                 <h2>Cart</h2>
                                 <p>you have {cartItem} product in your cart </p>
+                                <div>
                                 {
                                     addedProducttoCart.map((product, id) => {
                                         return (
@@ -81,6 +82,7 @@ const Navbar = () => {
                                         )
                                     })
                                 }
+                                </div>
                                 {
                                     cartlength === 0 ? null : (
                                 <div>
