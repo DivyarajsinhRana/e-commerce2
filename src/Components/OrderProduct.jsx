@@ -10,9 +10,7 @@ const OrderProduct = () => {
         <div className='container mt-3'>
             <div>
                 <h2>Name:Rana Divyarajsinh chandrasinh</h2>
-                
                 <address>A-405,Raj appartment,<br/>Rajendrapark,<br/>odhav,<br/>ahmedabad,pin-382415</address>
-            
             </div>
             {
                 order ? (
