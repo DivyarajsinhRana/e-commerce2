@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import { useNavigate } from 'react-router'
-import { DeleteOutlined, EditOutlined } from '@material-ui/icons'
+import { DeleteOutlined} from '@material-ui/icons'
 import { Button } from '@material-ui/core'
 import { useSelector } from "react-redux";
 

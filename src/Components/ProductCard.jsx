@@ -1,5 +1,5 @@
 import React from 'react'
-import '../Styles/productcard.css'
+import '../Styles/App.css'
 import { useDispatch } from 'react-redux'
 const ProductCard = (props) => {
     

@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import '../Styles/home.css'
+import '../Styles/App.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchProduct } from '../Redux/fetchProductAction'
 import { useParams,useNavigate } from 'react-router-dom'
@@ -14,16 +14,12 @@ const Productdetail = () => {
     const item = useSelector(state => state.productlist.product);
     console.log(item);
     const selectedItem = item.find((item) => item.id === parseInt(id));
-    // console.log(selectedItem)
+ 
     useEffect(() => {
         dispatch(fetchProduct(baseURL))
     }, [])
     const cartItem=useSelector(state => state.addcart);
-    // const [title,setTitle]=usestate()
-    // const [image,setImage]=usestate()
-    // const [category,setCategory]=usestate()
-    // const [price,setPrice]=usestate()
-    // console.log(cartItem)
+   
     const cartedProduct={
         id:selectedItem.id,
         title:selectedItem.title,

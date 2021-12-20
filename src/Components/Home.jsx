@@ -1,4 +1,4 @@
-import '../Styles/home.css'
+import '../Styles/App.css'
 import React, { useState, useEffect } from 'react'
 import Filter from './Filter'
 import { fetchProduct } from '../Redux/fetchProductAction'
@@ -6,7 +6,6 @@ import { baseURL } from '../API'
 import ProductCard from './ProductCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import "../Styles/productcard.css"  
 const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -60,22 +59,10 @@ const Home = () => {
                 console.log("default")
         }
     }
-    // const initial = [1, 7, 3, 5];
-    
-    // console.log(initial, sorted)
     const [sort, setSort] = useState('');
-    
-
-    // console.log(sorted);
-   
-// console.log(initial, sorted)
-// const sorted = [...filterproducts].sort((a, b) => a.price - b.price);
-// setfilterProducts(sorted);
-console.log(filterproducts)
+    console.log(filterproducts)
     const sortProduct = (e) => {
         setSort(e.target.value)
-        //   if (sort==="Low to high"){
-        //    }
         switch(e.target.value){
             case "Low to high" :
                 setfilterProducts((state)=>[...state].sort((a, b) => a.price - b.price));
@@ -90,16 +77,6 @@ console.log(filterproducts)
             console.log("default")
             break;
         }
-    //     if(e.target.value==="Low to high"){
-    //         setfilterProducts((state)=>[...state].sort((a, b) => a.price - b.price));
-    //     }
-    //     else if(e.target.valuet==="High to low"){
-    //         setfilterProducts((state)=>[...state].sort((a, b) => b.price - a.price));
-    //     }
-    //     else {
-    //         setfilterProducts(filterproducts)
-    //     }
-    //    }
     }
     
     return (
@@ -113,9 +90,9 @@ console.log(filterproducts)
                                 {
                                     state.loading ?
                                         (
-                                            <div className='d-flex justify-content-center align-item-center'>
+                                            <div className='d-flex justify-content-center align-item-center mt-5'>
                                                 <span className='spinner-border' />
-                                                <span className='mx-2'>Loading products from api</span>
+                                                <span className='mx-2'>Loading</span>
                                             </div>
                                         ) :
                                         state.errors ?

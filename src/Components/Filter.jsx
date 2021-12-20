@@ -1,20 +1,6 @@
-
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchProduct } from '../Redux/fetchProductAction'
-import productReducer from '../Redux/productReducer'
-import ProductCard from './ProductCard'
-import "../Styles/productcard.css"
-import { useNavigate } from 'react-router'
-import { baseURL } from '../API'
+import React from 'react'
+import "../Styles/App.css"
 const Filter = (props) => {
-    // const items = useSelector(state => state.productlist.product);
-    // const item = useSelector(state => state.productlist);
-    // const navigate=useNavigate();
-    // const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(fetchProduct(baseURL))
-    // }, [])
     return (
         <>
         <div className='d-flex justify-content-between mt-3'>
@@ -38,30 +24,6 @@ const Filter = (props) => {
                         </select>
                     </div>
         </div>
-         {/* <div>
-             {
-                item.loading ?
-                    (<h2>Loading products from api</h2>) :
-                    item.errors ?
-                        (<h2>{item.errors}</h2>) :
-                        (
-                            <div className='row gx-5'>{
-                                item.product.map(
-                                    (user, id) =>
-                                    (
-                                        <div className="col-3" key={id}  onClick={() => {
-                                            navigate(`/productdetails/${user.id}`);
-                                        }}>  
-                                            <ProductCard  src={user.image} title={user.title} category={user.category} price={user.price}
-                                            />
-                                        </div>
-                                        
-                                    )
-                                )
-                            }</div>
-                        )
-            }
-        </div> */}
         </>
     )
 }

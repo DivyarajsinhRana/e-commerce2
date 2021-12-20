@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import '../Styles/order.css'
+import '../Styles/App.css'
 const OrderProduct = () => {
     const order=useSelector(state=>state.addcart)
     const navigate=useNavigate()
