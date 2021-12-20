@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router'
 import { DeleteOutlined} from '@material-ui/icons'
 import { Button } from '@material-ui/core'
 import { useSelector } from "react-redux";
-
+import { removeproduct } from '../Redux/cartaction';
+import { removeFromCart } from '../Redux/countaction';
+import { useDispatch } from 'react-redux';
 const ProductCheckout = () => {
+    const dispatch = useDispatch()
     const navigate=useNavigate();
     const newProduct = useSelector(state => state.addcart)
     const amount=newProduct.map(cart=>cart.price);
@@ -24,49 +27,63 @@ const ProductCheckout = () => {
      }
     useEffect(()=>{
         total();
-    },[])
-    return (
-        <div>
-                 <div className=" container  mt-5">
-            <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        newProduct.map((product, id) => {
-                            return(
-                                <tr key={id}>
-                                <td>{id+1}</td>
-                                <td><h5>{product.title}</h5></td>
-                                <td><img style={{height:"10%",width:"15%"}} src={product.image}/></td>
-                                <td><h5>{product.category}</h5></td>
-                                <td><h5>${product.price}</h5></td>
-                                <td>
-                                    <Button className="bg-danger">
-                                        <DeleteOutlined  />
-                                    </Button>
-                                </td>
-                            </tr>
-                            )
-                        })
-                    }
-                </tbody>
-            </table>
+    },[newProduct])
+    const cartLength=newProduct.length;
+    console.log(cartLength);
+    const handleClick = (id) => {
+        dispatch(removeFromCart());
+        dispatch(removeproduct(id))
+    }
+    return  (
+         <div>
+        {
+            cartLength === 0 ? (<h1>You have 0 item in cart</h1>) :
+            (
+                <div>
+                <div className=" container  mt-5">
+           <table class="table table-responsive">
+               <thead>
+                   <tr>
+                       <th scope="col">No</th>
+                       <th scope="col">Name</th>
+                       <th scope="col">Image</th>
+                       <th scope="col">Category</th>
+                       <th scope="col">Price</th>
+                       <th scope="col">Remove</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   {
+                       newProduct.map((product, id) => {
+                           return(
+                               <tr key={id}>
+                               <td>{id+1}</td>
+                               <td><h5>{product.title}</h5></td>
+                               <td><img style={{height:"10%",width:"15%"}} src={product.image}/></td>
+                               <td><h5>{product.category}</h5></td>
+                               <td><h5>${product.price}</h5></td>
+                               <td>
+                                   <Button className="bg-danger" onClick={()=>handleClick(product.id)}>
+                                       <DeleteOutlined  />
+                                   </Button>
+                               </td>
+                           </tr>
+                           )
+                       })
+                   }
+               </tbody>
+           </table>
+       </div>
+               <div className="d-flex justify-content-center"> 
+               <button className="btn btn-primary" onClick={()=>navigate('/')}>Back</button>
+               <button className="btn btn-success mx-2" onClick={()=>navigate('/order')}>Procced to buy</button>
+               <p className=''>amount:{producttotal}</p>
+               </div>
+       </div>
+            )
+        }
         </div>
-                <div className="d-flex justify-content-center"> 
-                <button className="btn btn-primary" onClick={()=>navigate('/')}>Back</button>
-                <button className="btn btn-success mx-2" onClick={()=>navigate('/order')}>Procced to buy</button>
-                <p className=''>amount:{producttotal}</p>
-                </div>
-        </div>
+       
     )
 }
 

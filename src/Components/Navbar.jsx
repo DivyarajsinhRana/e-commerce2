@@ -26,6 +26,7 @@ const Navbar = () => {
         dispatch(removeFromCart());
         dispatch(removeproduct(id))
     }
+    const cartlength=addedProducttoCart.length
     return (
         <>
             <div className='mainNav'>
@@ -80,12 +81,16 @@ const Navbar = () => {
                                         )
                                     })
                                 }
+                                {
+                                    cartlength === 0 ? null : (
                                 <div>
                                     <button className="btn btn-success mt-3" onClick={() => {
                                         navigate("/checkout")
                                     }}>
                                         Checkout</button>
                                 </div>
+                                    )
+                                }
                                 </div>
                             </Drawer>
                         </div>

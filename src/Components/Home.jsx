@@ -78,7 +78,6 @@ const Home = () => {
             break;
         }
     }
-    
     return (
         <>
             <div className="container-fluid">
