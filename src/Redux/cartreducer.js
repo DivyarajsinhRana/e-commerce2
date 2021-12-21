@@ -11,6 +11,7 @@ const cartaddreducer=(state=initialstate,action)=>{
         case "addedtocart":
             {
                 state=[...state,action.payload]
+                console.log("carted product",state);
                 return state
             }
         case "removeproduct":

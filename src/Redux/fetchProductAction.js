@@ -22,6 +22,25 @@ const filterProduct=(filteredProduct)=>{
         payload:filteredProduct
     }
 }
+
+const detailProduct_req=()=>{
+    return {
+        type:"detailProduct_req",
+    }
+}
+const detailProduct = (product)=>{
+    return {
+        type :"detailProduct",
+        payload:product
+    }
+}
+const  detailProduct_Fail =(error)=>{
+    return {
+        type: "detailProduct_Fail",
+        payload: error
+    }
+}
+
 const fetchProduct=(url)=>{
     return (dispatch)=>{
             dispatch(getProduct_Req());
@@ -39,6 +58,18 @@ const fetchProduct=(url)=>{
             )
     }
 }
+const fetchDetail=(url)=>{
+    return (dispatch)=> {
+        dispatch(detailProduct_req());
+        axios.get(url).then((res)=>{
+            const product=res.data;
+            console.log("producct detail",product);
+            dispatch(detailProduct(product))
+        }).catch((e)=>{
+            dispatch(detailProduct_Fail(e.message))
+        })
+    }
+}
 
-export  {fetchProduct}
+export  {fetchProduct,fetchDetail}
 

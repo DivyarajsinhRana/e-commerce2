@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import '../Styles/App.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchProduct } from '../Redux/fetchProductAction'
+import { fetchDetail, fetchProduct } from '../Redux/fetchProductAction'
 import { useParams,useNavigate } from 'react-router-dom'
 import { baseURL } from '../API'
 import { AddCircle, Star } from '@material-ui/icons'
@@ -11,41 +11,45 @@ const Productdetail = () => {
     const dispatch = useDispatch();
     const navigate=useNavigate();
     const { id } = useParams();
-    const item = useSelector(state => state.productlist.product);
-    console.log(item);
-    const selectedItem = item.find((item) => item.id === parseInt(id));
- 
+    console.log(id)
+    // const item = useSelector(state => state.productlist.product);
+    // console.log(item);
+    // const selectedItem = item.find((item) => item.id === parseInt(id));
+    const detail = useSelector(state=>state.productDetail);
+    console.log(detail);
+    const detailproduct=detail.product;
     useEffect(() => {
-        dispatch(fetchProduct(baseURL))
+        // dispatch(fetchProduct(baseURL))
+        dispatch(fetchDetail(`${baseURL}/${id}`))
     }, [])
     const cartItem=useSelector(state => state.addcart);
    
-    const cartedProduct={
-        id:selectedItem.id,
-        title:selectedItem.title,
-        image:selectedItem.image,
-        category:selectedItem.category,
-        price:selectedItem.price
-    }
-   const [availstock,setAvailstock]=useState(selectedItem.rating.count);
+    // const cartedProduct={
+    //     id:detailproduct.id,
+    //     title:detailproduct.title,
+    //     image:detailproduct.image,
+    //     category:detailproduct.category,
+    //     price:detailproduct.price
+    // }
+//    const [availstock,setAvailstock]=useState(detailproduct.rating.count);
     const handleCart=()=>{
         dispatch(addToCart());
-        dispatch(addedtocart(cartedProduct));
-        setAvailstock((prev)=>prev-1);
+        dispatch(addedtocart(detailproduct));
+        // setAvailstock((prev)=>prev-1);
     }
     return (
         <div className='mt-2 d-grid productGrid'>
             <div className='row'>
                 <div className='col1 col-6'>
-                    <img src={selectedItem.image} className='image1' />
+                    <img src={detailproduct.image} className='image1' />
                 </div>
                 <div className='col1 col-6'>
                     <div>
-                        <h1>{selectedItem.title}</h1>
-                        <p>{selectedItem.description}</p>
+                        <h1>{detailproduct.title}</h1>
+                        <p>{detailproduct.description}</p>
                         <div className='d-flex justify-content-between align-item-center'>
-                            <p><Star />{selectedItem.rating.rate}</p>
-                            <p>Available stock:{availstock}</p>
+                            {/* <p><Star />{detailproduct.rating.rate}</p> */}
+                            {/* <p>Available stock:{availstock}</p> */}
                         </div>
                         <div>
                             <button className='btn btn-primary' onClick={handleCart}><AddCircle/>Add to cart</button>
