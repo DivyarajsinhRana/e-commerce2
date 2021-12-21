@@ -25,9 +25,9 @@ const Home = () => {
     const filterProduct = (e) => {
        
         switch (e.target.value) {
-            case "Filter by category":
-                setfilterProducts(filterproducts)
-                setCategory(filterproducts)
+            case "All":
+                setfilterProducts(products);
+                setCategory(products)
                 console.log(e.target.value)
             case "men's clothing":
                 setfilterProducts(products.filter(item => item.category === "men's clothing"));

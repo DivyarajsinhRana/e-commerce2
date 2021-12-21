@@ -10,6 +10,7 @@ const Filter = (props) => {
                     <div className='filter-category'>
                         <select className="form-select" aria-label="Default select example" value={props.category} onChange={props.filterProduct}>
                             <option value="Filter by category">Filter by category</option>
+                            <option value="All">All</option>
                             <option value="men's clothing">men's clothing</option>
                             <option value="jewelery">jewelery</option>
                             <option value="electronics">electronics</option>
