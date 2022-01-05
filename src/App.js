@@ -1,8 +1,8 @@
 import React from 'react'
 import Navbar from './Components/Navbar';
 import { Routes,Route  } from 'react-router-dom';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
+  import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+  import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import Home from './Components/Home';
 import Productdetail from './Components/Productdetail';
 import ProductCheckout from './Components/ProductCheckout';

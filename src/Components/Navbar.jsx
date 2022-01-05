@@ -1,15 +1,14 @@
 import { Search } from '@material-ui/icons'
-import React,{ useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart } from '../Redux/countaction'
 import '../Styles/App.css'
 import { removeproduct } from '../Redux/cartaction';
-import { Drawer} from '@material-ui/core';
+import { Drawer } from '@material-ui/core';
 import { RemoveCircle } from '@material-ui/icons';
 const Navbar = () => {
-    const cartitem = useSelector(state => state.cart)
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
         setOpen(true)
@@ -21,17 +20,15 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const addedProducttoCart = useSelector(state => state.addcart);
     console.log(addedProducttoCart)
-    const cartItem = useSelector(state => state.cart)       
     const handleClick = (id) => {
         dispatch(removeFromCart());
         dispatch(removeproduct(id))
     }
-    const cartlength=addedProducttoCart.length
+    const cartlength = addedProducttoCart.length
     console.log(cartlength);
     return (
         <>
             <div className='mainNav'>
-
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container-fluid d-flex justify-content-between align-items-center">
                         <div className='nav-right d-flex'>
@@ -58,42 +55,42 @@ const Navbar = () => {
                             </button>
                             <Drawer open={open} onClose={handleClose} anchor="right" className="cartDrawer" variant='temporary'>
                                 <div className='bg-white text-dark mx-5'>
-                                <h2>Cart</h2>
-                                <p>you have {cartlength} product in your cart </p>
-                                <div>
-                                {
-                                    addedProducttoCart.map((product, id) => {
-                                        return (
-                                            <div key={id}>{
-                                                (
-                                                    <div>
-                                                        <img src={product.image} className="image mx-5" alt="" />
-                                                        <div>
-                                                            <h4>{product.title}</h4>
-                                                            <p><strong>${product.price}</strong></p>
-                                                        </div>
-                                                        <div>
-                                                            <button className="btn btn-danger" onClick={() => handleClick(product.id)}><RemoveCircle />Remove from cart</button>
-                                                        </div>
+                                    <h2>Cart</h2>
+                                    <p>you have {cartlength} product in your cart </p>
+                                    <div>
+                                        {
+                                            addedProducttoCart.map((product, id) => {
+                                                return (
+                                                    <div key={id}>{
+                                                        (
+                                                            <div>
+                                                                <img src={product.image} className="image mx-5" alt="" />
+                                                                <div>
+                                                                    <h4>{product.title}</h4>
+                                                                    <p><strong>${product.price}</strong></p>
+                                                                </div>
+                                                                <div>
+                                                                    <button className="btn btn-danger" onClick={() => handleClick(product.id)}><RemoveCircle />Remove from cart</button>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }
+
                                                     </div>
                                                 )
-                                            }
-
+                                            })
+                                        }
+                                    </div>
+                                    {
+                                        cartlength === 0 ? null : (
+                                            <div>
+                                                <button className="btn btn-success mt-3" onClick={() => {
+                                                    navigate("/checkout")
+                                                }}>
+                                                    Checkout</button>
                                             </div>
                                         )
-                                    })
-                                }
-                                </div>
-                                {
-                                    cartlength === 0 ? null : (
-                                <div>
-                                    <button className="btn btn-success mt-3" onClick={() => {
-                                        navigate("/checkout")
-                                    }}>
-                                        Checkout</button>
-                                </div>
-                                    )
-                                }
+                                    }
                                 </div>
                             </Drawer>
                         </div>

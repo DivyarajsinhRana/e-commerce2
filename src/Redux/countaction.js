@@ -1,6 +1,6 @@
 const addToCart=()=>{
     return({
-        type:"add to cart",
+        type:"add to cart"
     }
     )
 }

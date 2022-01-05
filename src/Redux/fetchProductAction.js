@@ -16,12 +16,6 @@ const getProduct_fail=(error)=>{
         payload:error
     }
 }
-const filterProduct=(filteredProduct)=>{
-    return{
-        type:"filter",
-        payload:filteredProduct
-    }
-}
 
 const detailProduct_req=()=>{
     return {

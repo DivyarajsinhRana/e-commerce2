@@ -3,7 +3,6 @@ const initialState={
     product:[],
     errors:""
 }
-
 const productDetailReducer=(state=initialState,action)=>{
     switch(action.type){
         case "detailProduct_req":
